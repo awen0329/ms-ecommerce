@@ -1,0 +1,67 @@
+/** @format */
+@import "./variables.scss";
+
+.main {
+  padding: 20px;
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow: auto;
+  background: $main-background;
+}
+
+.title {
+  font-size: 36px;
+  line-height: 48px;
+  font-weight: 700;
+  padding: 20px 0 32px 0;
+}
+
+.tabbar {
+  height: 32px;
+  display: flex;
+  gap: 18px;
+
+  & > span {
+    color: $disable-color;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+
+    &.selected {
+      color: $text-secondary;
+      border-bottom: 1px solid $text-secondary;
+    }
+  }
+}
+
+@media (min-width: 375px) and (max-width: 568px) {
+  .products {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 569px) and (max-width: 768px) {
+  .products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 20px;
+  }
+}

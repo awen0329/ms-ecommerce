@@ -1,0 +1,61 @@
+/** @format */
+@import "@/styles/variables.scss";
+
+.card {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $card-background;
+  box-shadow: 0px 20px 35px rgba(23, 20, 57, 0.04);
+  border-radius: 14px;
+  position: relative;
+}
+
+.image {
+  position: relative;
+  height: 150px;
+  width: 100%;
+  & > img {
+    width: auto !important;
+    object-fit: contain;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.product {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > p {
+    text-align: center;
+  }
+}
+
+.product_name {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 600;
+  color: $text-primary;
+  margin-bottom: 8px;
+}
+
+.product_brand {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 500;
+  color: $disable-color;
+  margin-bottom: 38px;
+}
+
+.product_price {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 600;
+  color: $text-secondary;
+  position: absolute;
+  bottom: 8px;
+}

@@ -21,7 +21,7 @@ export default function SearchInput() {
         </div>
         <input
           ref={inputEl}
-          placeholder="Some placeholder text"
+          placeholder="Search Product"
           className={styles.input_field}
           onFocus={() => setBlur(!blur)}
           onBlur={() => setBlur(false)}

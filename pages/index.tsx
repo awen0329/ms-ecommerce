@@ -1,15 +1,21 @@
 /** @format */
 
-import { Raleway } from "@next/font/google"
 import Header from "@/components/header"
+import ProductCard from "@/components/productCard"
+import apiClient from "@/lib/client"
+import { IGetProductsResponse } from "@/lib/types/product"
 import styles from "@/styles/Home.module.scss"
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 
-const inter = Raleway({ subsets: ["latin"] })
+const Home = () => {
+  const router = useRouter()
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <Header />
-    </main>
-  )
+  useEffect(() => {
+    router.push("/kategory", undefined, { shallow: true })
+  }, [router])
+
+  return null
 }
+
+export default Home
