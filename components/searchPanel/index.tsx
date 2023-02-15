@@ -8,13 +8,15 @@ import useKeyPress from "@/hooks/useKeyPress"
 import useSelectSearchItem from "@/hooks/useSelectSearchItem"
 
 interface SearchPanelProps {
+  loading: boolean
   variant: "popular" | "history"
   items: string[]
   onItemSelect: (searchKey: string) => void
 }
 
 const SearchPanel: React.FC<SearchPanelProps> = ({
-  variant = "history",
+  loading,
+  variant,
   items,
   onItemSelect,
 }) => {
@@ -57,18 +59,20 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
         </p>
       </div>
       <div className={styles.divider} />
-      <div>
-        {items.map((searchKey, index) => (
-          <SearchHistoryItem
-            key={searchKey}
-            selected={index === selectedItem}
-            canRemove={variant === "history"}
-            name={searchKey}
-            onClick={onItemSelect}
-            onClose={(searchKey) => history.clear(searchKey)}
-          />
-        ))}
-      </div>
+      {!loading && (
+        <div>
+          {items.map((searchKey, index) => (
+            <SearchHistoryItem
+              key={searchKey}
+              selected={index === selectedItem}
+              canRemove={variant === "history"}
+              name={searchKey}
+              onClick={onItemSelect}
+              onClose={(searchKey) => history.clear(searchKey)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

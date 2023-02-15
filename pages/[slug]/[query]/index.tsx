@@ -7,7 +7,7 @@ import apiClient from "@/lib/client"
 import { IGetProductsResponse } from "@/lib/types/product"
 import styles from "@/styles/Kategory.module.scss"
 
-const kategorySearch: NextPage<{ products: IGetProductsResponse }> = ({
+const KategorySearch: NextPage<{ products: IGetProductsResponse }> = ({
   products,
 }) => {
   return (
@@ -28,7 +28,7 @@ const kategorySearch: NextPage<{ products: IGetProductsResponse }> = ({
   )
 }
 
-export default kategorySearch
+export default KategorySearch
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {

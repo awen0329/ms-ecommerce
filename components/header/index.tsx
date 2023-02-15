@@ -89,6 +89,7 @@ export default function Header() {
       </header>
       {searchPanelOpen && (
         <SearchPanel
+          loading={loading}
           variant={typing ? "popular" : "history"}
           items={typing ? suggestedKeys : history.history}
           onItemSelect={handleItemSelect}
