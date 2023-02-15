@@ -1,7 +1,7 @@
 /** @format */
 
 import Image from "next/image"
-import React, { ChangeEvent, useEffect, useState } from "react"
+import React, { ChangeEvent, useEffect, useRef, useState } from "react"
 import { useRouter } from "next/router"
 
 import SearchPanel from "@/components/searchPanel"
@@ -18,6 +18,8 @@ export default function Header() {
   const [typing, setTyping] = useState<boolean>(false)
   const [searchPanelOpen, setSearchPanelOpen] = useState<boolean>(false)
   const [suggestedKeys, setSuggestedKeys] = useState<any[]>([])
+
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   const router = useRouter()
   const history = useSearchHistory()
@@ -50,6 +52,7 @@ export default function Header() {
       setTyping(false)
       setSearchPanelOpen(false)
       router.push(`/kategori?q=${key}`)
+      searchInputRef.current?.blur()
     }
   }, [enterPressed])
 
@@ -66,6 +69,7 @@ export default function Header() {
 
   const handleItemSelect = (searchKey: string) => {
     router.push(`/kategori?q=${searchKey}`)
+    setSearchPanelOpen(false)
   }
 
   return (
@@ -80,10 +84,12 @@ export default function Header() {
             width="24"
           />
           <SearchInput
+            ref={searchInputRef}
             value={searchKey}
             onChange={handleChange}
             onFocus={() => handleFocus()}
             onClick={() => handleFocus()}
+            placeholder="Search Product"
           />
         </div>
       </header>
