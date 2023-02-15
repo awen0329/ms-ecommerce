@@ -12,6 +12,10 @@ v1.
 
 This app is mainly mobile friendly designed.
 
+## Prerequisites
+
+In order to avoid `cors error` for some api endpoints, first of all, please add [CORS Chrome Extension](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=eni) on your browser.
+
 ## Node Version
 
 v18.3.0
