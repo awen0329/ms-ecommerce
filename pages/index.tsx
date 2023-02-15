@@ -12,7 +12,7 @@ const Home = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.push("/kategory", undefined, { shallow: true })
+    router.push("/kategori", undefined, { shallow: true })
   }, [router])
 
   return null

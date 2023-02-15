@@ -1,18 +1,17 @@
 /** @format */
 
-import { NextPage } from "next"
-import Header from "@/components/header"
+import { GetStaticPaths, GetStaticProps, NextPage } from "next"
+
 import ProductCard from "@/components/productCard"
 import apiClient from "@/lib/client"
 import { IGetProductsResponse } from "@/lib/types/product"
 import styles from "@/styles/Kategory.module.scss"
 
-const Kategory: NextPage<{ products: IGetProductsResponse }> = ({
+const kategorySearch: NextPage<{ products: IGetProductsResponse }> = ({
   products,
 }) => {
   return (
-    <main className={styles.main}>
-      <Header />
+    <>
       <p className={styles.title}>Find your favorite products now.</p>
       <div className={styles.tabbar}>
         <span className="selected">Trendy foods</span>
@@ -25,16 +24,25 @@ const Kategory: NextPage<{ products: IGetProductsResponse }> = ({
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-    </main>
+    </>
   )
 }
 
-export default Kategory
+export default kategorySearch
 
-export const getStaticProps = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const slug = context.params?.slug
+  const q = context.params?.query
   const data = await apiClient.post("/slug", {
-    slug: "/kategori",
-    query: { q: "cocacola" },
+    slug,
+    query: { q },
   })
 
   return {
