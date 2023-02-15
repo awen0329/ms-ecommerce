@@ -14,13 +14,13 @@ const kategorySearch: NextPage<{ products: IGetProductsResponse }> = ({
     <>
       <p className={styles.title}>Find your favorite products now.</p>
       <div className={styles.tabbar}>
-        <span className="selected">Trendy foods</span>
+        <span className={styles.selected}>Trendy foods</span>
         <span>Bread</span>
         <span>Milk</span>
         <span>Egg</span>
       </div>
       <div className={styles.products}>
-        {products.payload.products.map((product) => (
+        {products?.payload.products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
@@ -32,7 +32,7 @@ export default kategorySearch
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [],
+    paths: [{ params: { slug: "kategori", query: "cocacola" } }],
     fallback: true,
   }
 }

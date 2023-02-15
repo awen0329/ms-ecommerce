@@ -1,9 +1,11 @@
 /** @format */
 
-import React from "react"
+import React, { useEffect } from "react"
 import SearchHistoryItem from "@/components/searchHistoryItem"
 import useSearchHistory from "@/hooks/useSearchHistory"
 import styles from "./SearchPanel.module.scss"
+import useKeyPress from "@/hooks/useKeyPress"
+import useSelectSearchItem from "@/hooks/useSelectSearchItem"
 
 interface SearchPanelProps {
   variant: "popular" | "history"
@@ -17,6 +19,25 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
   onItemSelect,
 }) => {
   const history = useSearchHistory()
+  const arrowUpPressed = useKeyPress("ArrowUp")
+  const arrowDownPressed = useKeyPress("ArrowDown")
+  const { selectedItem, handleArrowDown, handleArrowUp } = useSelectSearchItem(
+    items.length
+  )
+
+  useEffect(() => {
+    if (arrowDownPressed) {
+      handleArrowDown()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [arrowDownPressed])
+
+  useEffect(() => {
+    if (arrowUpPressed) {
+      handleArrowUp()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [arrowUpPressed])
 
   return (
     <div className={styles.search_panel}>
@@ -32,9 +53,10 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
       </div>
       <div className={styles.divider} />
       <div>
-        {items.map((searchKey) => (
+        {items.map((searchKey, index) => (
           <SearchHistoryItem
             key={searchKey}
+            selected={index === selectedItem}
             canRemove={variant === "history"}
             name={searchKey}
             onClick={onItemSelect}

@@ -19,6 +19,10 @@ export default function Header() {
   const { loading, data } = useGetSuggestions(searchKey)
 
   useEffect(() => {
+    setSearchKey((router.query.q as string) || "")
+  }, [router.query])
+
+  useEffect(() => {
     if (typing && !loading && data) {
       setSuggestedKeys(data.suggestions.map(({ text }) => text))
     }
@@ -69,7 +73,7 @@ export default function Header() {
           />
         </div>
       </header>
-      {focus && (
+      {(focus || typing) && (
         <SearchPanel
           variant={typing ? "popular" : "history"}
           items={typing ? suggestedKeys : history.history}

@@ -1,11 +1,12 @@
 /** @format */
 
-import React, { MouseEventHandler } from "react"
+import React, { KeyboardEvent } from "react"
 import Image from "next/image"
 import styles from "./SearchHistoryItem.module.scss"
 
 interface SearchHistoryItemProps {
   name: string
+  selected: boolean
   onClick: (name: string) => void
   onClose: (name: string) => void
   canRemove?: boolean
@@ -13,6 +14,7 @@ interface SearchHistoryItemProps {
 
 const SearchHistoryItem: React.FC<SearchHistoryItemProps> = ({
   name,
+  selected,
   onClick,
   onClose,
   canRemove,
@@ -25,8 +27,20 @@ const SearchHistoryItem: React.FC<SearchHistoryItemProps> = ({
     }
   }
 
+  const handleEnter = (e: KeyboardEvent<HTMLDivElement>) => {
+    console.log(name)
+    e.preventDefault()
+    e.stopPropagation()
+    if (selected && e.key === "Enter") {
+      onClick(name)
+    }
+  }
+
   return (
-    <div className={styles.history_item}>
+    <div
+      className={`${styles.history_item} ${selected ? styles.selected : ""}`}
+      onKeyDown={handleEnter}
+    >
       <p onClick={() => onClick(name)}>{name}</p>
       <Image
         src={canRemove ? "/Close.svg" : "/Search.svg"}
