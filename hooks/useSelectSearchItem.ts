@@ -3,7 +3,7 @@
 import SelectSearchItemState from "@/states/selectSearchItem"
 import { useRecoilState } from "recoil"
 
-export default function useSelectSearchItem(length: number) {
+export default function useSelectSearchItem(length: number = 0) {
   const [selectedItem, setSelectedItem] = useRecoilState(SelectSearchItemState)
 
   const handleArrowUp = () => {
@@ -22,9 +22,14 @@ export default function useSelectSearchItem(length: number) {
     }
   }
 
+  const deselect = () => {
+    setSelectedItem(-1)
+  }
+
   return {
     selectedItem,
     handleArrowDown,
     handleArrowUp,
+    deselect,
   }
 }

@@ -21,9 +21,14 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
   const history = useSearchHistory()
   const arrowUpPressed = useKeyPress("ArrowUp")
   const arrowDownPressed = useKeyPress("ArrowDown")
-  const { selectedItem, handleArrowDown, handleArrowUp } = useSelectSearchItem(
-    items.length
-  )
+  const { selectedItem, handleArrowDown, handleArrowUp, deselect } =
+    useSelectSearchItem(items.length)
+
+  useEffect(() => {
+    return () => {
+      deselect()
+    }
+  }, [])
 
   useEffect(() => {
     if (arrowDownPressed) {
