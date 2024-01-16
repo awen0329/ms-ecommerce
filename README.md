@@ -1,9 +1,5 @@
 <!-- @format -->
 
-## Author
-
-Andrus Wen
-
 ## App Version
 
 v1.
